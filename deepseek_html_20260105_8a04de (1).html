@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>256 дней любви</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@100;200;300;400&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background: #fef9f7;
+            color: #333;
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        /* Декоративные элементы */
+        .decorative-hearts {
+            position: fixed;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .heart-left {
+            position: fixed;
+            top: 20%;
+            left: 5%;
+            font-size: 2rem;
+            color: rgba(230, 180, 180, 0.2);
+            animation: gentlePulse 8s ease-in-out infinite;
+            transform-origin: center;
+        }
+        
+        .heart-right {
+            position: fixed;
+            top: 15%;
+            right: 5%;
+            font-size: 1.8rem;
+            color: rgba(230, 180, 180, 0.15);
+            animation: gentlePulse 10s ease-in-out infinite;
+            transform-origin: center;
+        }
+        
+        .heart-bottom {
+            position: fixed;
+            bottom: 10%;
+            right: 8%;
+            font-size: 2.2rem;
+            color: rgba(230, 180, 180, 0.1);
+            animation: gentlePulse 12s ease-in-out infinite;
+            transform-origin: center;
+        }
+        
+        .heart-center {
+            position: fixed;
+            bottom: 20%;
+            left: 8%;
+            font-size: 1.5rem;
+            color: rgba(230, 180, 180, 0.18);
+            animation: gentlePulse 9s ease-in-out infinite;
+            transform-origin: center;
+        }
+        
+        @keyframes gentlePulse {
+            0%, 100% { 
+                transform: scale(1) rotate(0deg);
+                opacity: 0.7;
+            }
+            50% { 
+                transform: scale(1.05) rotate(5deg);
+                opacity: 1;
+            }
+        }
+        
+        /* Заголовок */
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding-top: 20px;
+        }
+        
+        .title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4.5rem;
+            color: #d4a798;
+            font-weight: normal;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+        
+        .subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+            font-size: 1.1rem;
+            color: #a89b9b;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .subtitle::before, .subtitle::after {
+            content: "•";
+            margin: 0 15px;
+            color: #d4a798;
+        }
+        
+        /* Основной контент */
+        .main-content {
+            position: relative;
+        }
+        
+        .message-line {
+            margin-bottom: 40px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1.2s ease-out;
+        }
+        
+        .message-line.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .opening-line {
+            font-size: 1.9rem;
+            color: #d4a798;
+            text-align: center;
+            font-weight: 500;
+            margin-bottom: 50px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(212, 167, 152, 0.2);
+        }
+        
+        .main-text {
+            font-size: 1.4rem;
+            line-height: 1.8;
+            margin-bottom: 10px;
+            text-align: left;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .main-text::before {
+            content: "❧";
+            position: absolute;
+            left: -5px;
+            top: -5px;
+            color: #d4a798;
+            font-size: 1.2rem;
+            opacity: 0.7;
+        }
+        
+        .highlight {
+            color: #b5838d;
+            font-weight: 600;
+        }
+        
+        /* Счетчик дней */
+        .days-counter {
+            text-align: center;
+            margin: 50px 0;
+            padding: 30px 0;
+            position: relative;
+        }
+        
+        .days-counter::before, .days-counter::after {
+            content: "";
+            position: absolute;
+            left: 20%;
+            right: 20%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, #d4a798, transparent);
+        }
+        
+        .days-counter::before {
+            top: 0;
+        }
+        
+        .days-counter::after {
+            bottom: 0;
+        }
+        
+        .days-number {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 4rem;
+            font-weight: 200;
+            color: #b5838d;
+            letter-spacing: 5px;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .days-text {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2rem;
+            color: #d4a798;
+            letter-spacing: 1px;
+        }
+        
+        /* Подпись */
+        .signature {
+            text-align: right;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(212, 167, 152, 0.2);
+        }
+        
+        .signature-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+            font-size: 1rem;
+            color: #a89b9b;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+        
+        .signature-name {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.8rem;
+            color: #d4a798;
+        }
+        
+        /* Кнопка музыки */
+        .music-control {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 40px 0 60px;
+        }
+        
+        .music-btn {
+            background: transparent;
+            border: 1px solid #d4a798;
+            color: #d4a798;
+            border-radius: 50px;
+            padding: 12px 30px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: 1px;
+        }
+        
+        .music-btn:hover {
+            background: rgba(212, 167, 152, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .music-btn.playing {
+            color: #b5838d;
+            border-color: #b5838d;
+            background: rgba(212, 167, 152, 0.05);
+        }
+        
+        /* Футер */
+        .footer {
+            text-align: center;
+            padding: 40px 0 20px;
+            margin-top: 40px;
+            border-top: 1px solid rgba(212, 167, 152, 0.1);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+            font-size: 0.9rem;
+            color: #a89b9b;
+            letter-spacing: 1px;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 3.5rem;
+            }
+            
+            .main-text {
+                font-size: 1.3rem;
+                padding-left: 15px;
+            }
+            
+            .days-number {
+                font-size: 3.2rem;
+            }
+            
+            .heart-left, .heart-right, .heart-bottom, .heart-center {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .title {
+                font-size: 2.8rem;
+            }
+            
+            .main-text {
+                font-size: 1.2rem;
+                padding-left: 10px;
+            }
+            
+            .days-number {
+                font-size: 2.5rem;
+            }
+            
+            .signature-name {
+                font-size: 2.2rem;
+            }
+            
+            .container {
+                padding: 20px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Декоративные сердечки -->
+    <div class="decorative-hearts">
+        <div class="heart-left">♡</div>
+        <div class="heart-right">♡</div>
+        <div class="heart-bottom">♡</div>
+        <div class="heart-center">♡</div>
+    </div>
+    
+    <div class="container">
+        <header class="header">
+            <h1 class="title">256 дней</h1>
+            <div class="subtitle">Любви и нежности</div>
+        </header>
+        
+        <div class="music-control">
+            <button class="music-btn" id="playMusic">
+                <i class="fas fa-music"></i> Включить музыку
+            </button>
+        </div>
+        
+        <main class="main-content">
+            <div class="message-line opening-line visible">
+                Любимая, хочу поздравить тебя...
+            </div>
+            
+            <div class="message-line" id="line1">
+                <p class="main-text">С <span class="highlight">256-М ДНЁМ САМЫХ ПРЕКРАСНЫХ И ЛЮБИМЫХ МНОЙ ОТНОШЕНИЙ!!!</span> Я ТАКОЙ СЧАСТЛИВЫЙ, ПОТОМУ ЧТО У МЕНЯ ЕСТЬ ТЫ <span class="highlight">🥹❤️</span></p>
+            </div>
+            
+            <div class="message-line" id="line2">
+                <p class="main-text"><span class="highlight">Уже 256 дней, вдумайся в это.. это так много 🥹</span> Я так рад, что у меня есть такая прекрасная, интересная, веселая, заботливая и любящая девушка как ты.</p>
+            </div>
+            
+            <div class="days-counter">
+                <span class="days-number">256</span>
+                <span class="days-text">дней счастья</span>
+            </div>
+            
+            <div class="message-line" id="line3">
+                <p class="main-text">Всегда думаю о том, как мне повезло в этом гнилом мире найти самую прекрасную, милую, очаровательную, красивую, горячую, умную, трудолюбивую девочку <span class="highlight">🥹❤️</span></p>
+            </div>
+            
+            <div class="message-line" id="line4">
+                <p class="main-text"><span class="highlight">Пожалуйста, оставайся моей принцессой всегда</span>, я обожаю ухаживать за тобой и быть рядом с тобой даже в самое тяжелое время, ты лучшее событие в моей жизни.</p>
+            </div>
+            
+            <div class="message-line" id="line5">
+                <p class="main-text"><span class="highlight">Люблю тебя, мой главный подарочек)</span> С любовью и наилучшими пожеланиями, твой мужчина <span class="highlight">💘</span></p>
+            </div>
+            
+            <div class="signature">
+                <div class="signature-text">С любовью</div>
+                <div class="signature-name">Твой мужчина</div>
+            </div>
+        </main>
+        
+        <footer class="footer">
+            <p>Создано с любовью · 256 дней счастья</p>
+        </footer>
+    </div>
+
+    <!-- Аудио элемент с локальным файлом -->
+    <audio id="backgroundMusic" loop preload="auto">
+        <source src="audio.mp3" type="audio/mpeg">
+        Ваш браузер не поддерживает аудио элементы.
+    </audio>
+
+    <script>
+        // Анимация появления текста
+        function animateText() {
+            const messageLines = document.querySelectorAll('.message-line');
+            
+            // Первая строка уже видима
+            let delay = 800;
+            
+            for (let i = 1; i < messageLines.length; i++) {
+                setTimeout(() => {
+                    messageLines[i].classList.add('visible');
+                }, delay);
+                
+                delay += 1200; // Задержка между появлением строк
+            }
+        }
+        
+        // Управление музыкой
+        function setupMusicPlayer() {
+            const playButton = document.getElementById('playMusic');
+            const backgroundMusic = document.getElementById('backgroundMusic');
+            let isPlaying = false;
+            
+            // Проверяем доступность аудиофайла
+            backgroundMusic.addEventListener('error', function(e) {
+                console.error("Ошибка загрузки аудиофайла:", e);
+                playButton.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Файл не найден';
+                playButton.disabled = true;
+                playButton.style.opacity = '0.5';
+                playButton.style.cursor = 'not-allowed';
+            });
+            
+            // Когда аудио готово к воспроизведению
+            backgroundMusic.addEventListener('canplaythrough', function() {
+                console.log("Аудиофайл готов к воспроизведению");
+                playButton.disabled = false;
+                playButton.innerHTML = '<i class="fas fa-music"></i> Включить музыку';
+            });
+            
+            // Обработчик клика по кнопке
+            playButton.addEventListener('click', function() {
+                if (isPlaying) {
+                    // Останавливаем музыку
+                    backgroundMusic.pause();
+                    playButton.innerHTML = '<i class="fas fa-music"></i> Включить музыку';
+                    playButton.classList.remove('playing');
+                    isPlaying = false;
+                } else {
+                    // Пытаемся начать воспроизведение
+                    const playPromise = backgroundMusic.play();
+                    
+                    if (playPromise !== undefined) {
+                        playPromise.then(() => {
+                            // Воспроизведение успешно началось
+                            playButton.innerHTML = '<i class="fas fa-pause"></i> Приостановить';
+                            playButton.classList.add('playing');
+                            isPlaying = true;
+                        }).catch(error => {
+                            console.log("Ошибка воспроизведения:", error);
+                            
+                            // Показываем пользователю, что нужно кликнуть еще раз
+                            playButton.innerHTML = '<i class="fas fa-exclamation-circle"></i> Нажмите еще раз';
+                            setTimeout(() => {
+                                playButton.innerHTML = '<i class="fas fa-music"></i> Включить музыку';
+                            }, 1500);
+                        });
+                    }
+                }
+            });
+            
+            // Устанавливаем громкость
+            backgroundMusic.volume = 0.5;
+        }
+        
+        // Инициализация после загрузки страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            // Начинаем анимацию текста с небольшой задержкой
+            setTimeout(animateText, 500);
+            
+            // Настраиваем плеер
+            setupMusicPlayer();
+        });
+    </script>
+</body>
+</html>
